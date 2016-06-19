@@ -447,8 +447,10 @@ class CachedDictTest(TestCase):
         # load the local cache from remote cache
         mydict._populate()
 
-        mydict.remote_cache.set(mydict.remote_cache_key, {'MYFLAG': 'value2'})
-        mydict.remote_cache.set(mydict.remote_cache_last_updated_key, now + 1)
+        mydict.remote_cache.set_many({
+            mydict.remote_cache_key: {'MYFLAG': 'value2'},
+            mydict.remote_cache_last_updated_key: now + 1
+        })
 
         # before timeout: local cache should not be updated
         with mock.patch('time.time', mock.Mock(return_value=now + mydict.timeout - 1)):
