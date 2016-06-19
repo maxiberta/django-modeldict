@@ -54,7 +54,7 @@ class CachedDict(object):
         return iter(self._local_cache)
 
     def __repr__(self):
-        return "<%s: %s>" % (self.__class__.__name__, self.model.__name__)
+        return "<%s>" % (self.__class__.__name__,)
 
     def iteritems(self):
         self._populate()
